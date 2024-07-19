@@ -24,6 +24,10 @@ import java.nio.charset.StandardCharsets
 import java.nio.file.{Files, Paths}
 import scala.collection.mutable.ListBuffer
 
+object GlobalData {
+  var prefix = ""
+}
+
 trait DifftestWithCoreid {
   val coreid = UInt(8.W)
 }

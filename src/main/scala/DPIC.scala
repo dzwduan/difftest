@@ -62,7 +62,7 @@ class DPIC[T <: DifftestBundle](gen: T, config: GatewayConfig) extends ExtModule
     argString.mkString(" ")
   }
 
-  override def desiredName: String = gen.desiredModuleName
+  override def desiredName: String = s"${GlobalData.prefix}${gen.desiredModuleName}"
   val dpicFuncName: String = s"v_difftest_${desiredName.replace("Difftest", "")}"
   val modPorts: Seq[Seq[(String, Data)]] = {
     var common = ListBuffer(Seq(("clock", clock)), Seq(("enable", enable)))
