@@ -93,6 +93,11 @@ public:
   bool enable_store_log = false;
 };
 
+#ifdef CPU_XIANGSHAN
+#define RAISE_NMI_INTR(f) f(raise_nmi_intr, difftest_raise_nmi_intr, void, bool)
+#else
+#define RAISE_NMI_INTR(f)
+#endif
 /* clang-format off */
 #define REF_BASE(f)                                                           \
   f(ref_init, difftest_init, void, )                                          \
@@ -105,6 +110,7 @@ public:
   f(uarchstatus_sync, difftest_uarchstatus_sync, void, void*)                 \
   f(store_commit, difftest_store_commit, int, uint64_t*, uint64_t*, uint8_t*) \
   f(raise_intr, difftest_raise_intr, void, uint64_t)                          \
+  RAISE_NMI_INTR(f)                                                           \
   f(load_flash_bin, difftest_load_flash, void, void*, size_t)
 
 #ifdef ENABLE_RUNHEAD
